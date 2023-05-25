@@ -4,10 +4,10 @@ import ContactForm from "../src/components/ContactForm";
 import TestimonialSlider from "../src/components/TestimonialSlider";
 import Layout from "../src/layout/Layout";
 
-const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
-  ssr: false,
-});
-const Index = () => {
+// const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
+//   ssr: false,
+// });
+const Index = ({ projects }) => {
   return (
     <Layout>
       <section className="section section-started">
@@ -74,11 +74,38 @@ const Index = () => {
               {/* Description */}
               <div className="text">
                 <p>A Collection of my favorite projects</p>
+                {/* <pre>{JSON.stringify(projects, null, 2)}</pre> */}
               </div>
             </div>
           </div>
           {/* Works */}
-          <ProjectIsotop />
+          <div className="works-box">
+            {projects.map((project) => (
+              <div className="works-items works-list-items row">
+                <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
+                  <div className="works-item">
+                    <Link href={`/${project.slug}`}>
+                      <a>
+                        <span className="image">
+                          <span className="img">
+                            <img
+                              src={project.headerimage.url}
+                              alt="Tree Map"
+                            />
+                            <span className="overlay" />
+                          </span>
+                        </span>
+                        <span className="desc">
+                          <span className="name">{project.title}</span>
+                          <span className="category">{project.subtitle}</span>
+                        </span>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className="section section-bg" id="blog-section">
@@ -718,3 +745,46 @@ const Index = () => {
   );
 };
 export default Index;
+
+export async function getStaticProps() {
+  const result = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_ID}/environments/master`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.CONTENTFUL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+              query{
+                projectsCollection{
+                  items{
+                    title,
+                    slug,
+                    subtitle,
+                    headerimage{
+                      url
+              }
+            }
+          }
+        }
+      `,
+      }),
+    }
+  );
+
+  if (!result.ok) {
+    console.error(result);
+    return {};
+  }
+
+  const { data } = await result.json();
+  const projects = data.projectsCollection.items;
+
+  return {
+    props: {
+      projects,
+    },
+  };
+}
