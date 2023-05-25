@@ -199,7 +199,7 @@ h5 {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	color: #FFF;
-	line-height: 1.3;
+	line-height: 1.1;
 }
 
 h1 {
@@ -207,7 +207,7 @@ h1 {
 }
 
 h2 {
-	font-size: 49px;
+	font-size: 42px;
 }
 
 h3 {
@@ -2051,7 +2051,7 @@ body.light-skin .header.sticky .navbar.default:before {
 	margin-top: 0;
 	margin-bottom: 40px;
 	font-family: "Sorts Mill Goudy";
-	font-size: 138px;
+	font-size: 100px;
 	line-height: 1;
 	color: #FFF;
 	font-weight: 400;
@@ -2324,6 +2324,10 @@ body.light-skin .header.sticky .navbar.default:before {
 
 .contacts-items .numbers-item .num {
 	font-size: 18px;
+}
+.contacts-items .numbers-item .num a{
+	font-size: 18px;
+	color: #01010b;
 }
 
 .numbers-item .title {
