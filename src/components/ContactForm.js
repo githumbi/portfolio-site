@@ -35,47 +35,37 @@ const ContactForm = () => {
       <div className="container">
         {/* Section Heading */}
         <div className="m-titles">
-          <h2
-            className="m-title"
-          >
-            Contact Me
-          </h2>
+          <h2 className="m-title">Contact Me</h2>
         </div>
         <div className="row row-custom">
           <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-right">
             {/* Section numbers */}
             <div className="numbers-items contacts-items">
-              <div
-                className="numbers-item"
-              >
+              <div className="numbers-item">
                 <div className="icon">
                   <i aria-hidden="true" className="fas fa-phone" />
                 </div>
-                <div className="num">+1 023-456-7800</div>
+                <div className="num">+254 712 039 804</div>
               </div>
-              <div
-                className="numbers-item"
-              >
+              <div className="numbers-item">
                 <div className="icon">
                   <i aria-hidden="true" className="fas fa-at" />
                 </div>
-                <div className="num">hi@ober.com</div>
+                <div className="num">githumbi74@gmail.com</div>
               </div>
-              <div
-                className="numbers-item"
-              >
+              <div className="numbers-item">
                 <div className="icon">
-                  <i aria-hidden="true" className="fas fa-location-arrow" />
+                  <i aria-hidden="true" className="fab fa-linkedin-in" />
                 </div>
-                <div className="num">43rd Street River Point NY 1023</div>
+                <div className="num">
+                  <a href="https://www.linkedin.com/in/joseph-githumbi/">in/joseph/githumbi</a>
+                </div>
               </div>
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 vertical-line">
             {/* contact form */}
-            <div
-              className="contacts-form"
-            >
+            <div className="contacts-form">
               <form id="cform" onSubmit={(e) => onSubmit(e)}>
                 <label>
                   Name

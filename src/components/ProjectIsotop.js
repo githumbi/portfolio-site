@@ -37,7 +37,7 @@ const ProjectIsotop = () => {
   return (
     <Fragment>
       <div className="works-box">
-        <div
+        {/* <div
           className="filter-links"
         >
           <a
@@ -75,7 +75,7 @@ const ProjectIsotop = () => {
           >
             Branding
           </a>
-        </div>
+        </div> */}
         <div className="works-items works-list-items row">
           <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
             <div className="works-item">
@@ -85,7 +85,7 @@ const ProjectIsotop = () => {
                     className="image"
                   >
                     <span className="img">
-                      <img src="assets/images/work4.jpg" alt="Zorro" />
+                      <img src="assets/images/tree-map.webp" alt="Tree Map" />
                       <span className="overlay" />
                     </span>
                   </span>
@@ -93,14 +93,12 @@ const ProjectIsotop = () => {
                     <span
                       className="name"
                     >
-                      Zorro
+                      Tree map
                     </span>
                     <span
                       className="category"
                     >
-                      Branding
-                      <br />
-                      Photography
+                      UI UX design
                     </span>
                   </span>
                 </a>
@@ -115,7 +113,7 @@ const ProjectIsotop = () => {
                     className="image"
                   >
                     <span className="img">
-                      <img src="assets/images/work2.jpg" alt="Gooir" />
+                      <img src="assets/images/sote-hero.webp" alt="Sote hub" />
                       <span className="overlay" />
                     </span>
                   </span>
@@ -123,13 +121,12 @@ const ProjectIsotop = () => {
                     <span
                       className="name"
                     >
-                      Gooir
+                      Sote Hub
                     </span>
                     <span
                       className="category"
                     >
-                      Branding
-                      <br />
+                     
                       UI UX Design
                     </span>
                   </span>
@@ -137,126 +134,7 @@ const ProjectIsotop = () => {
               </Link>
             </div>
           </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-development sorting-ui-ux-design ">
-            <div className="works-item">
-              <Link href="/work-single">
-                <a>
-                  <span
-                    className="image"
-                  >
-                    <span className="img">
-                      <img src="assets/images/work7.jpg" alt="Explore" />
-                      <span className="overlay" />
-                    </span>
-                  </span>
-                  <span className="desc">
-                    <span
-                      className="name"
-                    >
-                      Explore
-                    </span>
-                    <span
-                      className="category"
-                    >
-                      Development
-                      <br />
-                      UI UX Design
-                    </span>
-                  </span>
-                </a>
-              </Link>
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
-            <div className="works-item">
-              <Link href="/work-single">
-                <a>
-                  <span
-                    className="image"
-                  >
-                    <span className="img">
-                      <img src="assets/images/work1.jpg" alt="Mozar" />
-                      <span className="overlay" />
-                    </span>
-                  </span>
-                  <span className="desc">
-                    <span
-                      className="name"
-                    >
-                      Mozar
-                    </span>
-                    <span
-                      className="category"
-                    >
-                      Branding
-                      <br />
-                      Photography
-                    </span>
-                  </span>
-                </a>
-              </Link>
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
-            <div className="works-item">
-              <Link href="/work-single">
-                <a>
-                  <span
-                    className="image"
-                  >
-                    <span className="img">
-                      <img src="assets/images/single8.jpg" alt="Stay Fit" />
-                      <span className="overlay" />
-                    </span>
-                  </span>
-                  <span className="desc">
-                    <span
-                      className="name"
-                    >
-                      Stay Fit
-                    </span>
-                    <span
-                      className="category"
-                    >
-                      Development
-                      <br />
-                      UI UX Design
-                    </span>
-                  </span>
-                </a>
-              </Link>
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
-            <div className="works-item">
-              <Link href="/work-single">
-                <a>
-                  <span
-                    className="image"
-                  >
-                    <span className="img">
-                      <img src="assets/images/single6.jpg" alt="Kana" />
-                      <span className="overlay" />
-                    </span>
-                  </span>
-                  <span className="desc">
-                    <span
-                      className="name"
-                    >
-                      Kana
-                    </span>
-                    <span
-                      className="category"
-                    >
-                      Development
-                      <br />
-                      Photography
-                    </span>
-                  </span>
-                </a>
-              </Link>
-            </div>
-          </div>
+        
         </div>
       </div>
     </Fragment>
