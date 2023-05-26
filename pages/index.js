@@ -1,8 +1,11 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
+// import { config } from "dotenv";
 import Link from "next/link";
 import ContactForm from "../src/components/ContactForm";
 import TestimonialSlider from "../src/components/TestimonialSlider";
 import Layout from "../src/layout/Layout";
+
+
 
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
@@ -81,17 +84,14 @@ const Index = ({ projects }) => {
           {/* Works */}
           <div className="works-box">
             {projects.map((project) => (
-              <div className="works-items works-list-items row">
+              <div key={project.id} className="works-items works-list-items row">
                 <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
                   <div className="works-item">
                     <Link href={`/${project.slug}`}>
                       <a>
                         <span className="image">
                           <span className="img">
-                            <img
-                              src={project.headerimage.url}
-                              alt="Tree Map"
-                            />
+                            <img src={project.headerimage.url} alt="Tree Map" />
                             <span className="overlay" />
                           </span>
                         </span>
@@ -757,28 +757,27 @@ export async function getStaticProps() {
       },
       body: JSON.stringify({
         query: `
-              query{
-                projectsCollection{
-                  items{
-                    title,
-                    slug,
-                    subtitle,
-                    headerimage{
-                      url
-              }
-            }
-          }
-        }
-      `,
+        query {
+  projectsCollection {
+    items {
+      title
+      subtitle
+      headerimage {
+        url
+      }
+      slug
+    }
+  }
+}
+        `,
       }),
     }
   );
 
   if (!result.ok) {
     console.error(result);
-    return {};
+    return {props:{} };
   }
-
   const { data } = await result.json();
   const projects = data.projectsCollection.items;
 
@@ -788,3 +787,4 @@ export async function getStaticProps() {
     },
   };
 }
+
