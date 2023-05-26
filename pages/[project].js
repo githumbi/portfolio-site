@@ -11,7 +11,7 @@ const WorkSingleIsotope = dynamic(
   }
 );
 
-const WorkSingle = () => {
+const WorkSingle = ({ project }) => {
   const [videoToggle, setVideoToggle] = useState(false);
   return (
     <Layout extraWrapClass={"project-single"}>
@@ -22,11 +22,7 @@ const WorkSingle = () => {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               {/* titles */}
               <div className="h-titles">
-                <h1
-                  className="h-title"
-                >
-                  Mozar
-                </h1>
+                <h1 className="h-title">{project.title}</h1>
               </div>
             </div>
           </div>
@@ -60,13 +56,11 @@ const WorkSingle = () => {
         </div>
       </section>
       {/* Image Large */}
-      <section
-        className="m-image-large"
-      >
+      <section className="m-image-large">
         <div className="image">
           <div
             className="img js-parallax"
-            style={{ backgroundImage: "url(assets/images/single1.jpg)" }}
+            style={{ backgroundImage: `url(${project.headerimage.url})` }}
           />
         </div>
       </section>
@@ -75,14 +69,8 @@ const WorkSingle = () => {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div
-                className="p-title"
-              >
-                Project Goal
-              </div>
-              <div
-                className="text"
-              >
+              <div className="p-title">Project Goal</div>
+              <div className="text">
                 <p>
                   Aliquam a sapien diam. Phasellus pulvinar tellus aliquam
                   eleifend consectetur. Sed bibendum leo quis rutrum
@@ -112,14 +100,8 @@ const WorkSingle = () => {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div
-                className="p-title"
-              >
-                Project Goal
-              </div>
-              <div
-                className="text"
-              >
+              <div className="p-title">Project Goal</div>
+              <div className="text">
                 <p>
                   Aliquam a sapien diam. Phasellus pulvinar tellus aliquam
                   eleifend consectetur. Sed bibendum leo quis rutrum
@@ -160,16 +142,8 @@ const WorkSingle = () => {
               <div className="h-titles h-navs">
                 <Link href="/work-single">
                   <a>
-                    <span
-                      className="nav-arrow"
-                    >
-                      Next Project
-                    </span>
-                    <span
-                      className="h-title"
-                    >
-                      Kana
-                    </span>
+                    <span className="nav-arrow">Next Project</span>
+                    <span className="h-title">Kana</span>
                   </a>
                 </Link>
               </div>
@@ -181,3 +155,95 @@ const WorkSingle = () => {
   );
 };
 export default WorkSingle;
+
+export async function getStaticProps({ params }) {
+  const { project } = params;
+
+  const result = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_ID}/environments/master`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.CONTENTFUL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+         query GetProject($slug: String!) {
+            projectsCollection (where:{slug: $slug},
+              limit: 1
+              ){
+              items {
+                title
+                subtitle
+                slug
+                headerimage {
+                  url
+      }
+    }
+  }
+}
+
+        `,
+        variables: {
+          slug: project,
+        },
+      }),
+    }
+  );
+
+  if (!result.ok) {
+    console.error(result);
+    return {};
+  }
+
+  const { data } = await result.json();
+
+  const [projectData] = data.projectsCollection.items;
+
+  return {
+    props: { project: projectData },
+  };
+}
+
+export async function getStaticPaths() {
+  const result = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_ID}/environments/master`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.CONTENTFUL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+        query {
+  projectsCollection {
+    items {
+      slug
+    }
+  }
+}
+        `,
+      }),
+    }
+  );
+
+  if (!result.ok) {
+    console.error(result);
+    return { props: {} };
+  }
+  const { data } = await result.json();
+  const projectSlugs = data.projectsCollection.items;
+
+  const paths = projectSlugs.map(({ slug }) => {
+    return {
+      params: { project: slug },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
