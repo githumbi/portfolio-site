@@ -37,45 +37,7 @@ const ProjectIsotop = () => {
   return (
     <Fragment>
       <div className="works-box">
-        {/* <div
-          className="filter-links"
-        >
-          <a
-            className={`c-pointer ${activeBtn("*")}`}
-            onClick={handleFilterKeyChange("*")}
-            data-href=".works-col"
-          >
-            All
-          </a>
-          <a
-            className={`c-pointer ${activeBtn("sorting-ui-ux-design")}`}
-            onClick={handleFilterKeyChange("sorting-ui-ux-design")}
-            data-href=".sorting-ui-ux-design"
-          >
-            UI UX Design
-          </a>
-          <a
-            className={`c-pointer ${activeBtn("sorting-photo")}`}
-            onClick={handleFilterKeyChange("sorting-photo")}
-            data-href=".sorting-photo"
-          >
-            Photography
-          </a>
-          <a
-            className={`c-pointer ${activeBtn("sorting-development")}`}
-            onClick={handleFilterKeyChange("sorting-development")}
-            data-href=".sorting-development"
-          >
-            Development
-          </a>
-          <a
-            className={`c-pointer ${activeBtn("sorting-branding")}`}
-            onClick={handleFilterKeyChange("sorting-branding")}
-            data-href=".sorting-branding"
-          >
-            Branding
-          </a>
-        </div> */}
+       
         <div className="works-items works-list-items row">
           <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
             <div className="works-item">
@@ -105,35 +67,7 @@ const ProjectIsotop = () => {
               </Link>
             </div>
           </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-ui-ux-design ">
-            <div className="works-item">
-              <Link href="/work-single">
-                <a>
-                  <span
-                    className="image"
-                  >
-                    <span className="img">
-                      <img src="assets/images/sote-hero.webp" alt="Sote hub" />
-                      <span className="overlay" />
-                    </span>
-                  </span>
-                  <span className="desc">
-                    <span
-                      className="name"
-                    >
-                      Sote Hub
-                    </span>
-                    <span
-                      className="category"
-                    >
-                     
-                      UI UX Design
-                    </span>
-                  </span>
-                </a>
-              </Link>
-            </div>
-          </div>
+         
         
         </div>
       </div>
