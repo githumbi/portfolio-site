@@ -17,6 +17,7 @@ const WorkSingleIsotope = dynamic(
 
 
 function renderOptions(links) {
+  
   // create an asset block map
   const assetBlockMap = new Map();
   // loop through the assets and add them to the map
@@ -24,12 +25,12 @@ function renderOptions(links) {
     assetBlockMap.set(asset.sys.id, asset);
   }
 
-  // create an entry block map
-  const entryBlockMap = new Map();
-  // loop through the entries and add them to the map
-  for (const entry of links.entries.block) {
-    entryBlockMap.set(entry.sys.id, entry);
-  }
+  // // create an entry block map
+  // const entryBlockMap = new Map();
+  // // loop through the entries and add them to the map
+  // for (const entry of links.entries.block) {
+  //   entryBlockMap.set(entry.sys.id, entry);
+  // }
 
   return {
     // other options...
@@ -37,26 +38,40 @@ function renderOptions(links) {
     renderNode: {
       // other options...
 
-      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-        // find the entry in the entryBlockMap by ID
-        const entry = entryBlockMap.get(node.data.target.sys.id);
+      // [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+      //   // find the entry in the entryBlockMap by ID
+      //   const entry = entryBlockMap.get(node.data.target.sys.id);
 
-        // render the entries as needed by looking at the __typename
-        // referenced in the GraphQL query
+      //   // render the entries as needed by looking at the __typename
+      //   // referenced in the GraphQL query
 
-        if (entry.__typename === "VideoEmbed") {
-          return (
-            <iframe
-              src={entry.embedUrl}
-              height="100%"
-              width="100%"
-              frameBorder="0"
-              scrolling="no"
-              title={entry.title}
-              allowFullScreen={true}
-            />
-          );
-        }
+      //   if (entry.__typename === "VideoEmbed") {
+      //     return (
+      //       <iframe
+      //         src={entry.embedUrl}
+      //         height="100%"
+      //         width="100%"
+      //         frameBorder="0"
+      //         scrolling="no"
+      //         title={entry.title}
+      //         allowFullScreen={true}
+      //       />
+      //     );
+      //   }
+      // },
+      [BLOCKS.LIST_ITEM]: (node, children) => {
+        const UnTaggedChildren = documentToReactComponents(node, {
+          renderNode: {
+            [BLOCKS.PARAGRAPH]: (node, children) => children,
+            [BLOCKS.LIST_ITEM]: (node, children) => children,
+          },
+        })
+
+        return (
+          <li>
+            {UnTaggedChildren}
+          </li>
+        )
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
         // find the asset in the assetBlockMap by ID
