@@ -3,6 +3,9 @@ import Layout from "../src/layout/Layout";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Asset } from "@contentful/rich-text-react-renderer";
 
 const WorkSingleIsotope = dynamic(
   () => import("../src/components/WorkSingleIsotope"),
@@ -10,6 +13,61 @@ const WorkSingleIsotope = dynamic(
     ssr: false,
   }
 );
+
+
+
+function renderOptions(links) {
+  // create an asset block map
+  const assetBlockMap = new Map();
+  // loop through the assets and add them to the map
+  for (const asset of links.assets.block) {
+    assetBlockMap.set(asset.sys.id, asset);
+  }
+
+  // create an entry block map
+  const entryBlockMap = new Map();
+  // loop through the entries and add them to the map
+  for (const entry of links.entries.block) {
+    entryBlockMap.set(entry.sys.id, entry);
+  }
+
+  return {
+    // other options...
+
+    renderNode: {
+      // other options...
+
+      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+        // find the entry in the entryBlockMap by ID
+        const entry = entryBlockMap.get(node.data.target.sys.id);
+
+        // render the entries as needed by looking at the __typename
+        // referenced in the GraphQL query
+
+        if (entry.__typename === "VideoEmbed") {
+          return (
+            <iframe
+              src={entry.embedUrl}
+              height="100%"
+              width="100%"
+              frameBorder="0"
+              scrolling="no"
+              title={entry.title}
+              allowFullScreen={true}
+            />
+          );
+        }
+      },
+      [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
+        // find the asset in the assetBlockMap by ID
+        const asset = assetBlockMap.get(node.data.target.sys.id);
+
+        // render the asset accordingly
+        return <img src={asset.url} alt="My image alt text" />;
+      },
+    },
+  };
+}
 
 const WorkSingle = ({ project }) => {
   const [videoToggle, setVideoToggle] = useState(false);
@@ -69,21 +127,11 @@ const WorkSingle = ({ project }) => {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div className="p-title">Project Goal</div>
-              <div className="text">
-                <p>
-                  Aliquam a sapien diam. Phasellus pulvinar tellus aliquam
-                  eleifend consectetur. Sed bibendum leo quis rutrum
-                  aliquetmorbi.
-                </p>
-                <p>
-                  Donec imperdiet risus at tortor consequat maximus et eget
-                  magna. Cras ornare sagittis augue, id sollicitudin justo
-                  tristique ut. Nullam ex enim, euismod vel bibendum ultrices,
-                  fringilla vel eros. Donec euismod leo lectus, et euismod metus
-                  euismod sed. Quisque quis suscipit ipsum, at pellentesque
-                  velit. Duis a congue sem.
-                </p>
+              <div>
+                {documentToReactComponents(
+                  project.body.json,
+                  renderOptions(project.body.links)
+                )}
               </div>
             </div>
           </div>
@@ -169,21 +217,30 @@ export async function getStaticProps({ params }) {
       },
       body: JSON.stringify({
         query: `
-         query GetProject($slug: String!) {
-            projectsCollection (where:{slug: $slug},
-              limit: 1
-              ){
-              items {
-                title
-                subtitle
-                slug
-                headerimage {
-                  url
+      query GetProject($slug: String!) {
+  projectsCollection(where: { slug: $slug }, limit: 1) {
+    items {
+      title
+      subtitle
+      slug
+      headerimage {  url }
+      body {  
+        json 
+        links {
+          assets {
+            block {
+              title
+              url
+              sys {
+                id
+              }
+            }
+          }
+        }
       }
     }
   }
 }
-
         `,
         variables: {
           slug: project,
