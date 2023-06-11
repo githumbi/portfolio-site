@@ -7,17 +7,14 @@ import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Asset } from "@contentful/rich-text-react-renderer";
 
-const WorkSingleIsotope = dynamic(
-  () => import("../src/components/WorkSingleIsotope"),
-  {
-    ssr: false,
-  }
-);
-
-
+// const WorkSingleIsotope = dynamic(
+//   () => import("../src/components/WorkSingleIsotope"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 function renderOptions(links) {
-  
   // create an asset block map
   const assetBlockMap = new Map();
   // loop through the assets and add them to the map
@@ -65,20 +62,23 @@ function renderOptions(links) {
             [BLOCKS.PARAGRAPH]: (node, children) => children,
             [BLOCKS.LIST_ITEM]: (node, children) => children,
           },
-        })
+        });
 
-        return (
-          <li>
-            {UnTaggedChildren}
-          </li>
-        )
+        return <li>{UnTaggedChildren}</li>;
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
         // find the asset in the assetBlockMap by ID
         const asset = assetBlockMap.get(node.data.target.sys.id);
 
         // render the asset accordingly
-        return <img src={asset.url} alt="My image alt text" />;
+        return (
+          <figure>
+            <img src={asset.url} alt="My image alt text" />
+            <figcaption class="text-center fst-italic">
+              {asset.description}
+            </figcaption>
+          </figure>
+        );
       },
     },
   };
@@ -109,20 +109,48 @@ const WorkSingle = ({ project }) => {
             <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 vertical-line">
               <div className="m-details">
                 <div className="details-label">
+                  <span>Role</span>
+                  <strong>
+                    {project.role.split(",").map((substring, idx) => {
+                      return (
+                        <div key={idx}>
+                          <span>{substring}</span>
+                          <br />
+                        </div>
+                      );
+                    })}
+                  </strong>
+                </div>
+                <div className="details-label">
                   <span>Year</span>
-                  <strong>2018</strong>
+                  <strong>{project.year}</strong>
                 </div>
                 <div className="details-label">
                   <span>Technology</span>
-                  <strong>Photoshop, XD</strong>
-                </div>
-                <div className="details-label">
-                  <span>Categories</span>
                   <strong>
-                    Photography <br />
-                    Branding
+                    {project.technology.split(",").map((substring, idx) => {
+                      return (
+                        <div key={idx}>
+                          <span>{substring}</span>
+                          <br />
+                        </div>
+                      );
+                    })}
                   </strong>
                 </div>
+                {/* <div className="details-label">
+                  <span>Collaborators</span>
+                  <strong>
+                    {project.collaborators.split(",").map((substring, idx) => {
+                      return (
+                        <div key={idx}>
+                          <span>{substring}</span>
+                          <br />
+                        </div>
+                      );
+                    })}
+                  </strong>
+                </div> */}
               </div>
             </div>
           </div>
@@ -153,13 +181,13 @@ const WorkSingle = ({ project }) => {
         </div>
       </section>
       {/* Section Gallery */}
-      <section className="section section-inner">
+      {/* <section className="section section-inner">
         <div className="container">
           <WorkSingleIsotope />
         </div>
-      </section>
+      </section> */}
       {/* Description */}
-      <section className="section section-bg">
+      {/* <section className="section section-bg">
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -182,9 +210,9 @@ const WorkSingle = ({ project }) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Video */}
-      <section className="m-video-large">
+      {/* <section className="m-video-large">
         <div className={`video ${videoToggle ? "active" : ""}`}>
           <div
             className="img js-parallax"
@@ -196,9 +224,9 @@ const WorkSingle = ({ project }) => {
           />
           <div className="play" onClick={() => setVideoToggle(true)} />
         </div>
-      </section>
+      </section> */}
       {/* Navigation */}
-      <section className="m-page-navigation">
+      {/* <section className="m-page-navigation">
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -213,7 +241,7 @@ const WorkSingle = ({ project }) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </Layout>
   );
 };
@@ -236,6 +264,10 @@ export async function getStaticProps({ params }) {
   projectsCollection(where: { slug: $slug }, limit: 1) {
     items {
       title
+      role
+      year
+      technology
+      collaborators
       subtitle
       slug
       headerimage {  url }
@@ -246,6 +278,7 @@ export async function getStaticProps({ params }) {
             block {
               title
               url
+              description
               sys {
                 id
               }
