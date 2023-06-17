@@ -10,7 +10,7 @@ import Layout from "../src/layout/Layout";
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
 // });
-const Index = ({ projects }) => {
+const Index = ({ projects , blogs}) => {
   return (
     <Layout>
       <section className="section section-started">
@@ -84,7 +84,10 @@ const Index = ({ projects }) => {
           {/* Works */}
           <div className="works-box">
             {projects.map((project) => (
-              <div key={project.id} className="works-items works-list-items row">
+              <div
+                key={project.id}
+                className="works-items works-list-items row"
+              >
                 <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
                   <div className="works-item">
                     <Link href={`/${project.slug}`}>
@@ -129,121 +132,44 @@ const Index = ({ projects }) => {
         </div>
         {/* Blog */}
         <div className="blog-items">
-          <div className="archive-item">
-            <div className="image">
-              <Link href="/blog-single">
-                <a>
-                  <img
-                    src="assets/images/blog4.jpg"
-                    alt="Usability Secrets to Create Better User Interfaces"
-                  />
-                </a>
-              </Link>
-            </div>
-            <div className="desc">
-              <div className="category">
-                UI Design
-                <br />
-                <span>November 28, 2021</span>
-              </div>
-              <h3 className="title">
-                <Link href="/blog-single">
-                  <a>Usability Secrets to Create Better User Interfaces</a>
+          {blogs.map((blog) => (
+            <div className="archive-item">
+              <div className="image">
+                <Link href={`/${blog.slug}`}>
+                  <a>
+                    <img
+                      src="assets/images/blog4.jpg"
+                      alt="Usability Secrets to Create Better User Interfaces"
+                    />
+                  </a>
                 </Link>
-              </h3>
-              <div className="text">
-                <p>
-                  Vivamus interdum suscipit lacus. Nunc ultrices accumsan
-                  mattis. Aliquam vel sem vel velit efficitur malesuada. Donec
-                  arcu lacus, ornare eget…{" "}
-                </p>
-                <div className="readmore">
-                  <Link href="/blog-single">
-                    <a className="lnk">Read more</a>
+              </div>
+              <div className="desc">
+                <div className="category">
+                  {blog.topic}
+                  <br />
+                  <span>{blog.publishedAt}</span>
+                </div>
+                <h3 className="title">
+                  <Link href={`/blog/${blog.slug}`}>
+                    <a>{blog.title}</a>
                   </Link>
+                </h3>
+                <div className="text">
+                  <p>
+                    Vivamus interdum suscipit lacus. Nunc ultrices accumsan
+                    mattis. Aliquam vel sem vel velit efficitur malesuada. Donec
+                    arcu lacus, ornare eget…{" "}
+                  </p>
+                  <div className="readmore">
+                    <Link href="/blog-single">
+                      <a className="lnk">Read more</a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="archive-item">
-            <div className="image">
-              <Link href="/blog-single">
-                <a>
-                  <img
-                    src="assets/images/blog3.jpg"
-                    alt="Three Ways To Level Up Your Photography"
-                  />
-                </a>
-              </Link>
-            </div>
-            <div className="desc">
-              <div className="category">
-                Branding
-                <br />
-                <span>November 28, 2021</span>
-              </div>
-              <h3 className="title">
-                <Link href="/blog-single">
-                  <a>Three Ways To Level Up Your Photography</a>
-                </Link>
-              </h3>
-              <div className="text">
-                <p>
-                  Vivamus interdum suscipit lacus. Nunc ultrices accumsan
-                  mattis. Aliquam vel sem vel velit efficitur malesuada. Donec
-                  arcu lacus, ornare eget…{" "}
-                </p>
-                <div className="readmore">
-                  <Link href="/blog-single">
-                    <a className="lnk">Read more</a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="archive-item">
-            <div className="image">
-              <Link href="/blog-single">
-                <a>
-                  <img
-                    src="assets/images/single7.jpg"
-                    alt="10 Useful Tips to Improve Your UI Designs"
-                  />
-                </a>
-              </Link>
-            </div>
-            <div className="desc">
-              <div className="category">
-                Photography
-                <br />
-                <span>November 28, 2021</span>
-              </div>
-              <h3 className="title">
-                <Link href="/blog-single">
-                  <a>10 Useful Tips to Improve Your UI Designs</a>
-                </Link>
-              </h3>
-              <div className="text">
-                <p>
-                  Vivamus interdum suscipit lacus. Nunc ultrices accumsan
-                  mattis. Aliquam vel sem vel velit efficitur malesuada. Donec
-                  arcu lacus, ornare eget…
-                </p>
-                <div className="readmore">
-                  <Link href="/blog-single">
-                    <a className="lnk">Read more</a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="blog-more-link">
-          <Link href="/blog">
-            <a className="btn">
-              <span>View Blog</span>
-            </a>
-          </Link>
+          ))}
         </div>
       </section>
       <section
@@ -767,6 +693,14 @@ export async function getStaticProps() {
       }
       slug
     }
+  },
+    blogCollection {
+    items {
+      publishedAt
+      topic
+      title
+      slug
+    }
   }
 }
         `,
@@ -780,10 +714,13 @@ export async function getStaticProps() {
   }
   const { data } = await result.json();
   const projects = data.projectsCollection.items;
+  const blogs = data.blogCollection.items;
+
 
   return {
     props: {
       projects,
+      blogs
     },
   };
 }
