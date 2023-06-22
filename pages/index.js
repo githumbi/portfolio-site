@@ -151,7 +151,7 @@ const Index = ({ projects , blogs}) => {
                   <span>{blog.publishedAt}</span>
                 </div>
                 <h3 className="title">
-                  <Link href={`/blog/${blog.slug}`}>
+                  <Link href={`blog/${blog.slug}`}>
                     <a>{blog.title}</a>
                   </Link>
                 </h3>
