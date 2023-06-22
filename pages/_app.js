@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <Head>
-        <title>OBER - One Page Resume React NextJS Template</title>
+        <title>Thumbi Design</title>
         {/* <!-- Fonts --> */}
        
       </Head>

@@ -1,7 +1,7 @@
 import Layout from "../../src/layout/Layout";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-
+import { formatPublishedDateForDateTime, formatPublishedDateForDisplay } from "../../utils/Date";
 
 
 function renderOptions(links) {
@@ -61,7 +61,16 @@ const MyBlog = ({blog}) => {
                   <a href="#" rel="category tag">
                     UX Design
                   </a>{" "}
-                  {blog.publishedAt}
+                  <span>
+                    <time
+                      dateTime={formatPublishedDateForDateTime(
+                        blog.publishedAt
+                      )}
+                    >
+                      {formatPublishedDateForDisplay(blog.publishedAt)}
+                    </time>
+                  </span>
+                 
                 </div>
               </div>
             </div>
