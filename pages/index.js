@@ -4,6 +4,7 @@ import Link from "next/link";
 import ContactForm from "../src/components/ContactForm";
 import TestimonialSlider from "../src/components/TestimonialSlider";
 import Layout from "../src/layout/Layout";
+import { formatPublishedDateForDateTime, formatPublishedDateForDisplay } from "../utils/Date";
 
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
@@ -134,7 +135,16 @@ const Index = ({ projects, blogs }) => {
                 <div className="category">
                   {blog.topic}
                   <br />
-                  <span>{blog.publishedAt}</span>
+
+                  <span>
+                    <time
+                      dateTime={formatPublishedDateForDateTime(
+                        blog.publishedAt
+                      )}
+                    >
+                      {formatPublishedDateForDisplay(blog.publishedAt)}
+                    </time>
+                  </span>
                 </div>
                 <h3 className="title">
                   <Link href={`blog/${blog.slug}`}>
