@@ -9,7 +9,7 @@ const Footer = () => {
               <div
                 className="copyright-text"
               >
-                © {new Date().getFullYear()} Githumbi. All Rights Reserved
+                © {new Date().getFullYear()} Thumbi. All Rights Reserved
               </div>
             </div>
           
