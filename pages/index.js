@@ -21,40 +21,59 @@ const Index = ({ projects, blogs }) => {
             </div>
             <div className="content">
               <div className="titles">
-                <div className="subtitle">Hi, it’s Githumbi</div>
-                <h2>
+                <div className="subtitle">Hi, it’s Thumbi</div>
+                {/* <h2>
                   UX Designer helping companies target right customers through
                   research and design.
-                </h2>
+                </h2> */}
               </div>
-              {/* <div className="description">
+              <div className="description">
                 <p>
                   UX Designer helping companies target right customers through
                   research and design.
                 </p>
                 <div className="social-links">
-                  <a target="_blank" rel="noreferrer" href="#">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://twitter.com/githumbi_jk"
+                  >
                     <i aria-hidden="true" className="fab fa-twitter" />
                   </a>
-                  <a target="_blank" rel="noreferrer" href="#">
-                    <i aria-hidden="true" className="fab fa-dribbble" />
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.linkedin.com/in/joseph-githumbi/"
+                  >
+                    <i aria-hidden="true" className="fab fa-linkedin" />
                   </a>
-                  <a target="_blank" rel="noreferrer" href="#">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.behance.net/josephkaguri1"
+                  >
                     <i aria-hidden="true" className="fab fa-behance" />
                   </a>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="info-list">
               <ul>
                 <li>
-                  Born in <strong>NewYork</strong>
+                  Skills <strong>Design, UX research, code</strong>
                 </li>
                 <li>
-                  Experience <strong>+ Years</strong>
+                  Experience <strong>5+ Years</strong>
                 </li>
                 <li>
-                  Date of Birth <strong>27 June 1992</strong>
+                  Current read
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.google.co.ke/books/edition/Think_Like_a_Monk/N-T7DwAAQBAJ?hl=en&gbpv=0"
+                  >
+                    <strong>Think like a monk</strong>
+                  </a>
                 </li>
               </ul>
             </div>
