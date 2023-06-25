@@ -177,7 +177,7 @@ const Index = ({ projects, blogs }) => {
                     arcu lacus, ornare eget…{" "}
                   </p> */}
                   <div className="readmore">
-                    <Link href="/blog-single">
+                    <Link href={`blog/${blog.slug}`}>
                       <a className="lnk">Read more</a>
                     </Link>
                   </div>
