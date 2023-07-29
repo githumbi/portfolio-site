@@ -9,6 +9,7 @@ import {
 import Footer from "./Footer";
 import Header from "./Header";
 import PreLoader from "./PreLoader";
+import Hotjar from "../../public/assets/js/hotjar";
 const Layout = ({ children, extraWrapClass }) => {
   useEffect(() => {
     initCursor();
@@ -34,6 +35,7 @@ const Layout = ({ children, extraWrapClass }) => {
 
   return (
     <Fragment>
+      <Hotjar />
       <div className="container-page ">
         {/* Preloader */}
         <PreLoader />
