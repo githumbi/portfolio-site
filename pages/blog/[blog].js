@@ -66,7 +66,7 @@ const MyBlog = ({ blog }) => {
           },
           // url: "www.example.com/next-seo-blog",
           images: {
-            url: blog.headerimage.url,
+            url: `${blog.headerimage.url}`,
             width: 850,
             height: 650,
             alt: blog.headerimage.description,
