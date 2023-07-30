@@ -14,6 +14,7 @@
     "isotope-layout": "^3.0.6",
     "jarallax": "^2.0.4",
     "next": "12.3.1",
+    "next-seo": "^6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scroll": "^1.8.7",

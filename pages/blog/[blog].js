@@ -1,8 +1,11 @@
 import Layout from "../../src/layout/Layout";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { formatPublishedDateForDateTime, formatPublishedDateForDisplay } from "../../utils/Date";
-
+import {
+  formatPublishedDateForDateTime,
+  formatPublishedDateForDisplay,
+} from "../../utils/Date";
+import { NextSeo } from "next-seo";
 
 function renderOptions(links) {
   // create an asset block map
@@ -12,12 +15,10 @@ function renderOptions(links) {
     assetBlockMap.set(asset.sys.id, asset);
   }
 
-
   return {
     // other options...
 
     renderNode: {
-  
       [BLOCKS.LIST_ITEM]: (node, children) => {
         const UnTaggedChildren = documentToReactComponents(node, {
           renderNode: {
@@ -46,44 +47,68 @@ function renderOptions(links) {
   };
 }
 
-const MyBlog = ({blog}) => {
+const MyBlog = ({ blog }) => {
   return (
-    <Layout extraWrapClass={"single-post"}>
-      {/* Section Started Heading */}
-      <section className="section section-inner started-heading">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              {/* titles */}
-              <div className="m-titles">
-                <h1 className="m-title">{blog.title}</h1>
-                <div className="m-category">
-                  <a href="#" rel="category tag">
-                    UX Design
-                  </a>{" "}
-                  <span>
-                    <time
-                      dateTime={formatPublishedDateForDateTime(
-                        blog.publishedAt
-                      )}
-                    >
-                      {formatPublishedDateForDisplay(blog.publishedAt)}
-                    </time>
-                  </span>
-                 
+    <>
+      <NextSeo
+        title={blog.title}
+        description=""
+        openGraph={{
+          type: "article",
+          article: {
+            publishedTime: blog.publishedAt,
+            // modifiedTime: "2022-01-21T18:04:43Z",
+            // authors: [
+            //   "https://www.example.com/authors/@firstnameA-lastnameA",
+            //   "https://www.example.com/authors/@firstnameB-lastnameB",
+            // ],
+            // tags: ["Tag A", "Tag B", "Tag C"],
+          },
+          // url: "www.example.com/next-seo-blog",
+          images: {
+            url: blog.contentForBlog.links.assets.block.url,
+            width: 850,
+            height: 650,
+            alt: blog.contentForBlog.links.assets.block.description,
+          },
+          site_name: "Thumbi",
+        }}
+      />
+      <Layout extraWrapClass={"single-post"}>
+        {/* Section Started Heading */}
+        <section className="section section-inner started-heading">
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                {/* titles */}
+                <div className="m-titles">
+                  <h1 className="m-title">{blog.title}</h1>
+                  <div className="m-category">
+                    <a href="#" rel="category tag">
+                      UX Design
+                    </a>{" "}
+                    <span>
+                      <time
+                        dateTime={formatPublishedDateForDateTime(
+                          blog.publishedAt
+                        )}
+                      >
+                        {formatPublishedDateForDisplay(blog.publishedAt)}
+                      </time>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      {/* Single Post */}
-      <section className="section section-inner m-archive">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-10 offset-1">
-              {/* image */}
-              {/* <div className="m-image-large">
+        </section>
+        {/* Single Post */}
+        <section className="section section-inner m-archive">
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-10 offset-1">
+                {/* image */}
+                {/* <div className="m-image-large">
                 <div className="image">
                   <div
                     className="img"
@@ -91,21 +116,22 @@ const MyBlog = ({blog}) => {
                   />
                 </div>
               </div> */}
-              {/* content */}
-              <div className="description">
-                <div className="post-content">
-                  {documentToReactComponents(
-                    blog.contentForBlog.json,
-                    renderOptions(blog.contentForBlog.links)
-                  )}
+                {/* content */}
+                <div className="description">
+                  <div className="post-content">
+                    {documentToReactComponents(
+                      blog.contentForBlog.json,
+                      renderOptions(blog.contentForBlog.links)
+                    )}
+                  </div>
                 </div>
               </div>
+              {/* Comments */}
             </div>
-            {/* Comments */}
           </div>
-        </div>
-      </section>
-    </Layout>
+        </section>
+      </Layout>
+    </>
   );
 };
 export default MyBlog;
