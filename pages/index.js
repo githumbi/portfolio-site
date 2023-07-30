@@ -93,7 +93,7 @@ const Index = ({ projects, blogs }) => {
             <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
             <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 vertical-line">
               {/* Description */}
-              <div className="text">
+              <div className="text py-3">
                 <p>A Collection of my favorite projects</p>
                 {/* <pre>{JSON.stringify(projects, null, 2)}</pre> */}
               </div>
@@ -116,7 +116,7 @@ const Index = ({ projects, blogs }) => {
                             <span className="overlay" />
                           </span>
                         </span>
-                        <span className="desc">
+                        <span className="desc py-2">
                           <span className="name">{project.title}</span>
                           <span className="category">{project.subtitle}</span>
                         </span>
