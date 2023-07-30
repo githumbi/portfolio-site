@@ -66,10 +66,10 @@ const MyBlog = ({ blog }) => {
           },
           // url: "www.example.com/next-seo-blog",
           images: {
-            url: blog.contentForBlog.links.assets.block.url,
+            url: blog.headerimage.url,
             width: 850,
             height: 650,
-            alt: blog.contentForBlog.links.assets.block.description,
+            alt: blog.headerimage.description,
           },
           site_name: "Thumbi",
         }}
@@ -153,6 +153,9 @@ export async function getStaticProps({ params }) {
  blogCollection(where: { slug: $slug }, limit: 1) {
     items {
       publishedAt
+      headerimage{
+        url
+      }
       topic
       title
       slug
