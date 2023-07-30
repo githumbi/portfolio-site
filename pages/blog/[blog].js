@@ -65,12 +65,12 @@ const MyBlog = ({ blog }) => {
             // tags: ["Tag A", "Tag B", "Tag C"],
           },
           // url: "www.example.com/next-seo-blog",
-          images: {
+          images:[ {
             url: blog.headerimage.url,
             width: 850,
             height: 650,
             alt: blog.headerimage.description,
-          },
+          },],
           site_name: "Thumbi",
         }}
       />
