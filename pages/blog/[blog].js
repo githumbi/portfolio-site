@@ -1,9 +1,11 @@
 import Layout from "../../src/layout/Layout";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { formatPublishedDateForDateTime, formatPublishedDateForDisplay } from "../../utils/Date";
-import {NextSeo} from 'next-seo'
-
+import {
+  formatPublishedDateForDateTime,
+  formatPublishedDateForDisplay,
+} from "../../utils/Date";
+import { NextSeo } from "next-seo";
 
 function renderOptions(links) {
   // create an asset block map
@@ -13,12 +15,10 @@ function renderOptions(links) {
     assetBlockMap.set(asset.sys.id, asset);
   }
 
-
   return {
     // other options...
 
     renderNode: {
-  
       [BLOCKS.LIST_ITEM]: (node, children) => {
         const UnTaggedChildren = documentToReactComponents(node, {
           renderNode: {
@@ -47,11 +47,12 @@ function renderOptions(links) {
   };
 }
 
-const MyBlog = ({blog}) => {
+const MyBlog = ({ blog }) => {
   return (
     <>
       <NextSeo
         title={blog.title}
+        description=""
         openGraph={{
           type: "article",
           article: {
