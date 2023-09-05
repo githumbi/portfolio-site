@@ -29,8 +29,7 @@ const Index = ({ projects, blogs }) => {
               </div>
               <div className="description">
                 <p>
-                  UX Designer helping companies target right customers through
-                  research and design.
+                  I help companies craft customer-centric products through research-driven design.
                 </p>
                 <div className="social-links">
                   <a
