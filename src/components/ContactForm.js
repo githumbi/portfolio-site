@@ -1,35 +1,14 @@
 import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 const ContactForm = () => {
-  const [contactData, setContactData] = useState({
-    name: "",
-    email: "",
-    messages: "",
-  });
-  const [error, setError] = useState(false);
-  const { name, email, messages } = contactData;
-
-  const onChange = (e) =>
-    setContactData({ ...contactData, [e.target.name]: e.target.value });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (name.length === 0 || email.length === 0 || messages.length === 0) {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 2000);
-    } else {
-      setError(false);
-      setTimeout(() => {
-        setContactData({ name: "", email: "", messages: "" });
-      }, 2000);
-    }
-  };
-
+  const [state, handleSubmit] = useForm("mbjnqkvy");
+  if (state.succeeded) {
+      return <p>Thanks for submiting!</p>;
+  }
   return (
     <section
-      className="section section-bg section-parallax section-parallax-2"
+      className="section section-bg "
       id="contact-section"
     >
       <div className="container">
@@ -68,58 +47,23 @@ const ContactForm = () => {
           <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 vertical-line">
             {/* contact form */}
             <div className="contacts-form">
-              <form id="cform" onSubmit={(e) => onSubmit(e)}>
-                <label>
-                  Name
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter your full name"
-                    value={name}
-                    onChange={(e) => onChange(e)}
-                  />
-                  {error && !name && (
-                    <label id="name-error" className="error" htmlFor="name">
-                      This field is required.
-                    </label>
-                  )}
-                </label>
-                <label>
-                  Email Address
-                  <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Enter your email address"
-                  />
-                  {error && !email && (
-                    <label id="email-error" className="error" htmlFor="email">
-                      This field is required.
-                    </label>
-                  )}
-                </label>
-                <label>
-                  Message
-                  <textarea
-                    name="message"
-                    value={messages}
-                    onChange={(e) => onChange(e)}
-                    placeholder="Enter your message here"
-                  />
-                  {error && !messages && (
-                    <label
-                      id="message-error"
-                      className="error"
-                      htmlFor="message"
-                    >
-                      This field is required.
-                    </label>
-                  )}
-                </label>
-                <a href="#" className="btn" onClick={(e) => onSubmit(e)}>
+              <form id="cform" onSubmit={handleSubmit}>
+                <label htmlFor="email">Email Address</label>
+                <input id="email" type="email" name="email" />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
+                />
+                <textarea id="message" name="message" />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                /><br></br>
+                <button type="submit" disabled={state.submitting}>
                   Submit
-                </a>
+                </button>
               </form>
             </div>
             <div className="alert-success" style={{ display: "none" }}>

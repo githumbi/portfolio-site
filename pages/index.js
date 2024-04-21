@@ -187,7 +187,7 @@ const Index = ({ projects, blogs }) => {
         </div>
       </section>
 
-      {/* <ContactForm /> */}
+      <ContactForm />
     </Layout>
   );
 };
