@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.16.5",
+    "@formspree/react": "^2.5.1",
     "dotenv": "^16.0.3",
     "isotope-layout": "^3.0.6",
     "jarallax": "^2.0.4",
