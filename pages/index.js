@@ -4,7 +4,10 @@ import Link from "next/link";
 import ContactForm from "../src/components/ContactForm";
 import TestimonialSlider from "../src/components/TestimonialSlider";
 import Layout from "../src/layout/Layout";
-import { formatPublishedDateForDateTime, formatPublishedDateForDisplay } from "../utils/Date";
+import {
+  formatPublishedDateForDateTime,
+  formatPublishedDateForDisplay,
+} from "../utils/Date";
 
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
@@ -17,19 +20,16 @@ const Index = ({ projects, blogs }) => {
           {/* Hero Started */}
           <div className="hero-started">
             <div className="slide">
-              <img src="assets/images/profilepic.webp" alt="" />
+              <img src="/assets/images/port-dark.webp" alt="Image of Joseph" />
             </div>
             <div className="content">
               <div className="titles">
-                <div className="subtitle">Hi, it’s Thumbi</div>
-                {/* <h2>
-                  UX Designer helping companies target right customers through
-                  research and design.
-                </h2> */}
+                <div className="subtitle">Product Designer 🎨</div>
               </div>
               <div className="description">
                 <p>
-                  I help companies craft customer-centric products through research-driven design.
+                  I help companies craft customer-centric products through
+                  research-driven design.
                 </p>
                 <div className="social-links">
                   <a
