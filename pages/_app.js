@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <Fragment>
       <DefaultSeo
         title="Thumbi"
-        description="UX Designer helping companies target right customers through research and design."
+        description="UX Designer helping companies craft customer-centric products through research-driven design."
         openGraph={{
           type: "website",
           locale: "en_IE",

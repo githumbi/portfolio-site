@@ -38,7 +38,7 @@ const ContactForm = () => {
                 </div>
                 <div className="num">
                   <a href="https://www.linkedin.com/in/joseph-githumbi/">
-                    in/joseph/githumbi
+                    in/joseph-githumbi
                   </a>
                 </div>
               </div>
