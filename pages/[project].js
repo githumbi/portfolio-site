@@ -1,18 +1,9 @@
 import Layout from "../src/layout/Layout";
 
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useState } from "react";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Asset } from "@contentful/rich-text-react-renderer";
-
-// const WorkSingleIsotope = dynamic(
-//   () => import("../src/components/WorkSingleIsotope"),
-//   {
-//     ssr: false,
-//   }
-// );
+import { NextSeo } from "next-seo";
 
 function renderOptions(links) {
   // create an asset block map
@@ -22,40 +13,8 @@ function renderOptions(links) {
     assetBlockMap.set(asset.sys.id, asset);
   }
 
-  // // create an entry block map
-  // const entryBlockMap = new Map();
-  // // loop through the entries and add them to the map
-  // for (const entry of links.entries.block) {
-  //   entryBlockMap.set(entry.sys.id, entry);
-  // }
-
   return {
-    // other options...
-
     renderNode: {
-      // other options...
-
-      // [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-      //   // find the entry in the entryBlockMap by ID
-      //   const entry = entryBlockMap.get(node.data.target.sys.id);
-
-      //   // render the entries as needed by looking at the __typename
-      //   // referenced in the GraphQL query
-
-      //   if (entry.__typename === "VideoEmbed") {
-      //     return (
-      //       <iframe
-      //         src={entry.embedUrl}
-      //         height="100%"
-      //         width="100%"
-      //         frameBorder="0"
-      //         scrolling="no"
-      //         title={entry.title}
-      //         allowFullScreen={true}
-      //       />
-      //     );
-      //   }
-      // },
       [BLOCKS.LIST_ITEM]: (node, children) => {
         const UnTaggedChildren = documentToReactComponents(node, {
           renderNode: {
@@ -88,6 +47,31 @@ const WorkSingle = ({ project }) => {
   const [videoToggle, setVideoToggle] = useState(false);
   return (
     <Layout extraWrapClass={"project-single"}>
+      <NextSeo
+        title={project.title}
+        description={project.subtitle}
+        canonical={`https://githumbi.com/${project.slug}`}
+        openGraph={{
+          type: "article",
+          // article: {
+          //   publishedTime: "2022-06-21T23:04:13Z",
+          //   modifiedTime: "2022-01-21T18:04:43Z",
+          //   authors: [
+          //     "https://www.example.com/authors/@firstnameA-lastnameA",
+          //     "https://www.example.com/authors/@firstnameB-lastnameB",
+          //   ],
+          //   tags: ["Tag A", "Tag B", "Tag C"],
+          // },
+          url: `https://githumbi.com/${project.slug}`,
+          images: {
+            url: `${project.headerimage.url}`,
+            width: 850,
+            height: 650,
+            alt: "Photo of text",
+          },
+          site_name: "Thumbi Portfolio",
+        }}
+      />
       {/* Section Started Heading */}
       <section className="section section-inner started-heading">
         <div className="container">
@@ -138,19 +122,6 @@ const WorkSingle = ({ project }) => {
                     })}
                   </strong>
                 </div>
-                {/* <div className="details-label">
-                  <span>Collaborators</span>
-                  <strong>
-                    {project.collaborators.split(",").map((substring, idx) => {
-                      return (
-                        <div key={idx}>
-                          <span>{substring}</span>
-                          <br />
-                        </div>
-                      );
-                    })}
-                  </strong>
-                </div> */}
               </div>
             </div>
           </div>
@@ -180,68 +151,6 @@ const WorkSingle = ({ project }) => {
           </div>
         </div>
       </section>
-      {/* Section Gallery */}
-      {/* <section className="section section-inner">
-        <div className="container">
-          <WorkSingleIsotope />
-        </div>
-      </section> */}
-      {/* Description */}
-      {/* <section className="section section-bg">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div className="p-title">Project Goal</div>
-              <div className="text">
-                <p>
-                  Aliquam a sapien diam. Phasellus pulvinar tellus aliquam
-                  eleifend consectetur. Sed bibendum leo quis rutrum
-                  aliquetmorbi.
-                </p>
-                <p>
-                  Donec imperdiet risus at tortor consequat maximus et eget
-                  magna. Cras ornare sagittis augue, id sollicitudin justo
-                  tristique ut. Nullam ex enim, euismod vel bibendum ultrices,
-                  fringilla vel eros. Donec euismod leo lectus, et euismod metus
-                  euismod sed. Quisque quis suscipit ipsum, at pellentesque
-                  velit. Duis a congue sem.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* Video */}
-      {/* <section className="m-video-large">
-        <div className={`video ${videoToggle ? "active" : ""}`}>
-          <div
-            className="img js-parallax"
-            style={{ backgroundImage: "url(assets/images/blog9.jpg)" }}
-          />
-          <iframe
-            className="js-video-iframe"
-            src="https://www.youtube.com/embed/Gu6z6kIukgg?showinfo=0&rel=0&autoplay=0"
-          />
-          <div className="play" onClick={() => setVideoToggle(true)} />
-        </div>
-      </section> */}
-      {/* Navigation */}
-      {/* <section className="m-page-navigation">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div className="h-titles h-navs">
-                <Link href="/work-single">
-                  <a>
-                    <span className="nav-arrow">Next Project</span>
-                    <span className="h-title">Kana</span>
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </Layout>
   );
 };
