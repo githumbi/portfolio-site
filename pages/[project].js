@@ -49,7 +49,7 @@ const WorkSingle = ({ project }) => {
     <Layout extraWrapClass={"project-single"}>
       <NextSeo
         title={project.title}
-        description={project.subtitle}
+        description={project.description}
         canonical={`https://githumbi.com/${project.slug}`}
         openGraph={{
           type: "article",
@@ -173,6 +173,7 @@ export async function getStaticProps({ params }) {
   projectsCollection(where: { slug: $slug }, limit: 1) {
     items {
       title
+      description
       role
       year
       technology
