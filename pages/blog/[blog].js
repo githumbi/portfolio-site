@@ -52,26 +52,12 @@ const MyBlog = ({ blog }) => {
     <>
       <NextSeo
         title={blog.title}
-        description=""
+        description={blog.description}
+        canonical={`https://githumbi.com/${blog.slug}`}
         openGraph={{
           type: "article",
-          article: {
-            publishedTime: blog.publishedAt,
-            // modifiedTime: "2022-01-21T18:04:43Z",
-            // authors: [
-            //   "https://www.example.com/authors/@firstnameA-lastnameA",
-            //   "https://www.example.com/authors/@firstnameB-lastnameB",
-            // ],
-            // tags: ["Tag A", "Tag B", "Tag C"],
-          },
-          // url: "www.example.com/next-seo-blog",
-          images:[ {
-            url: blog.headerimage.url,
-            width: 850,
-            height: 650,
-            alt: blog.headerimage.description,
-          },],
-          site_name: "Thumbi",
+          url: `https://githumbi.com/${blog.slug}`,
+          site_name: "Thumbi Portfolio",
         }}
       />
       <Layout extraWrapClass={"single-post"}>
@@ -158,6 +144,7 @@ export async function getStaticProps({ params }) {
       }
       topic
       title
+      description
       slug
       contentForBlog {
         json
