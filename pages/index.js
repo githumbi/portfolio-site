@@ -8,11 +8,12 @@ import {
   formatPublishedDateForDateTime,
   formatPublishedDateForDisplay,
 } from "../utils/Date";
-
+import { fetchMediumPosts } from "../lib/fetchMediumPosts";
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
 // });
-const Index = ({ projects, blogs }) => {
+const Index = ({ projects, blogs ,posts}) => {
+
   return (
     <Layout>
       <section className="section section-started">
@@ -136,11 +137,12 @@ const Index = ({ projects, blogs }) => {
           </div>
         </div>
         {/* Blog */}
+       
         <div className="blog-items">
-          {blogs.map((blog) => (
+          {posts.map((post) => (
             <div className="archive-item">
               <div className="image">
-                <Link href={`/${blog.slug}`}>
+                <Link href={`/blog/${encodeURIComponent(post.guid)}`}>
                   <a>
                     <img
                       src="assets/images/blog4.jpg"
@@ -151,10 +153,10 @@ const Index = ({ projects, blogs }) => {
               </div>
               <div className="desc">
                 <div className="category">
-                  {blog.topic}
+                  {post.title}
                   <br />
 
-                  <span>
+                  {/* <span>
                     <time
                       dateTime={formatPublishedDateForDateTime(
                         blog.publishedAt
@@ -162,11 +164,11 @@ const Index = ({ projects, blogs }) => {
                     >
                       {formatPublishedDateForDisplay(blog.publishedAt)}
                     </time>
-                  </span>
+                  </span> */}
                 </div>
                 <h3 className="title">
-                  <Link href={`blog/${blog.slug}`}>
-                    <a>{blog.title}</a>
+                  <Link href={`/blog/${encodeURIComponent(post.guid)}`}>
+                    <a>{post.title}</a>
                   </Link>
                 </h3>
                 <div className="text">
@@ -176,7 +178,7 @@ const Index = ({ projects, blogs }) => {
                     arcu lacus, ornare eget…{" "}
                   </p> */}
                   <div className="readmore">
-                    <Link href={`blog/${blog.slug}`}>
+                    <Link href={`/blog/${encodeURIComponent(post.guid)}`}>
                       <a className="lnk">Read more</a>
                     </Link>
                   </div>
@@ -191,9 +193,12 @@ const Index = ({ projects, blogs }) => {
     </Layout>
   );
 };
+
+
 export default Index;
 
 export async function getStaticProps() {
+  const posts = await fetchMediumPosts();
   const result = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_ID}/environments/master`,
     {
@@ -241,6 +246,10 @@ export async function getStaticProps() {
     props: {
       projects,
       blogs,
+      posts,
     },
+    revalidate: 60, // Revalidate every 60 seconds
   };
 }
+
+
