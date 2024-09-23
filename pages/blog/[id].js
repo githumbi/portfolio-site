@@ -70,7 +70,7 @@ const BlogPost = ({ post }) => {
 export async function getStaticPaths() {
   const posts = await fetchMediumPosts();
   const paths = posts.map((post) => ({
-    params: { id: post.guid },
+    params: { id: post.title.split(' ').join('-') },
   }));
 
   return { paths, fallback: true };
@@ -78,7 +78,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const posts = await fetchMediumPosts();
-  const post = posts.find((post) => post.guid === params.id);
+  const post = posts.find((post) => post.title.split(' ').join('-') === params.id);
 
   return {
     props: {
