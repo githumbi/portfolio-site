@@ -9,6 +9,8 @@ import {
   formatPublishedDateForDisplay,
 } from "../utils/Date";
 
+import ReservationApp from "../public/assets/images/reservation-app.png";
+
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
 // });
@@ -125,6 +127,29 @@ const Index = ({ projects, blogs }) => {
                 </div>
               </div>
             ))}
+            <div className="works-items works-list-items row">
+              <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
+                <div className="works-item">
+                  <Link href="https://www.behance.net/gallery/143839299/Restaurant-Reservation-UX-Design">
+                    <a target="_blank">
+                      <span className="image">
+                        <span className="img">
+                          <img
+                            src="/assets/images/reservation-app.png"
+                            alt="Reservation Map"
+                          />
+                          <span className="overlay" />
+                        </span>
+                      </span>
+                      <span className="desc py-2">
+                        <span className="name">Reservation app</span>
+                        <span className="category">UI design</span>
+                      </span>
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
