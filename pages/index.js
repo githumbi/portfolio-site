@@ -8,13 +8,12 @@ import {
   formatPublishedDateForDateTime,
   formatPublishedDateForDisplay,
 } from "../utils/Date";
-
-import ReservationApp from "../public/assets/images/reservation-app.png";
-
+import { fetchMediumPosts } from "../lib/fetchMediumPosts";
+import { testImage } from "../public/assets/images/blog7.jpg";
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
 // });
-const Index = ({ projects, blogs }) => {
+const Index = ({ projects, blogs, posts }) => {
   return (
     <Layout>
       <section className="section section-started">
@@ -61,7 +60,7 @@ const Index = ({ projects, blogs }) => {
             <div className="info-list">
               <ul>
                 <li>
-                  Skills <strong>Design, UX research, code</strong>
+                  Skills <strong>Design | Developer</strong>
                 </li>
                 <li>
                   Experience <strong>5+ Years</strong>
@@ -161,14 +160,19 @@ const Index = ({ projects, blogs }) => {
           </div>
         </div>
         {/* Blog */}
+
         <div className="blog-items">
-          {blogs.map((blog) => (
-            <div className="archive-item">
+          {posts.map((post) => (
+            <div key={post.guid} className="archive-item">
               <div className="image">
-                <Link href={`/${blog.slug}`}>
+                <Link href={`/blog/${encodeURIComponent(post.guid)}`}>
                   <a>
                     <img
-                      src="assets/images/blog4.jpg"
+                      src={
+                        post.description
+                          .toString()
+                          .match(/<img[^>]+src="([^">]+)"/)[1]
+                      }
                       alt="Usability Secrets to Create Better User Interfaces"
                     />
                   </a>
@@ -176,32 +180,40 @@ const Index = ({ projects, blogs }) => {
               </div>
               <div className="desc">
                 <div className="category">
-                  {blog.topic}
+                  {post.categories}
                   <br />
 
                   <span>
                     <time
-                      dateTime={formatPublishedDateForDateTime(
-                        blog.publishedAt
-                      )}
+                      dateTime={formatPublishedDateForDateTime(post.pubDate)}
                     >
-                      {formatPublishedDateForDisplay(blog.publishedAt)}
+                      {formatPublishedDateForDisplay(post.pubDate)}
                     </time>
                   </span>
                 </div>
                 <h3 className="title">
-                  <Link href={`blog/${blog.slug}`}>
-                    <a>{blog.title}</a>
+                  <Link
+                    href={`/blog/${encodeURIComponent(
+                      post.title.split(" ").join("-")
+                    )}`}
+                  >
+                    <a>{post.title}</a>
                   </Link>
                 </h3>
+                <img src={testImage} />
                 <div className="text">
                   {/* <p>
-                    Vivamus interdum suscipit lacus. Nunc ultrices accumsan
-                    mattis. Aliquam vel sem vel velit efficitur malesuada. Donec
-                    arcu lacus, ornare eget…{" "}
+                    {post.description
+                      .toString()
+                      .match(/<p[^>]*>(.*?)<\/p>/)?.[1]
+                      .slice(0, 200) + "..." || ""}
                   </p> */}
                   <div className="readmore">
-                    <Link href={`blog/${blog.slug}`}>
+                    <Link
+                      href={`/blog/${encodeURIComponent(
+                        post.title.split(" ").join("-")
+                      )}`}
+                    >
                       <a className="lnk">Read more</a>
                     </Link>
                   </div>
@@ -216,9 +228,11 @@ const Index = ({ projects, blogs }) => {
     </Layout>
   );
 };
+
 export default Index;
 
 export async function getStaticProps() {
+  const posts = await fetchMediumPosts();
   const result = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_ID}/environments/master`,
     {
@@ -266,6 +280,8 @@ export async function getStaticProps() {
     props: {
       projects,
       blogs,
+      posts,
     },
+    revalidate: 60, // Revalidate every 60 seconds
   };
 }
