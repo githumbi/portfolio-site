@@ -16,15 +16,15 @@ import { useState, useEffect } from "react";
 //   ssr: false,
 // });
 const Index = ({ projects, blogs, posts }) => {
-  const [image, setImage] = useState("/assets/images/port-dark.webp");
+  const [image, setImage] = useState("/assets/images/profile-pic.png");
 
   useEffect(() => {
     const checkSkin = () => {
       const isLightSkin = document.body.classList.contains("light-skin");
       setImage(
         isLightSkin
-          ? "/assets/images/port-dark.webp"
-          : "/assets/images/port-light.webp"
+          ? "/assets/images/profile-pic.png"
+          : "/assets/images/profile-pic-light.png"
       );
     };
 
@@ -58,13 +58,13 @@ const Index = ({ projects, blogs, posts }) => {
                   research-driven design.
                 </p>
                 <div className="social-links">
-                  <a
+                  {/* <a
                     target="_blank"
                     rel="noreferrer"
                     href="https://twitter.com/githumbi_jk"
                   >
                     <i aria-hidden="true" className="fab fa-twitter" />
-                  </a>
+                  </a> */}
                   <a
                     target="_blank"
                     rel="noreferrer"
@@ -82,48 +82,43 @@ const Index = ({ projects, blogs, posts }) => {
                 </div>
               </div>
             </div>
-            <div className="info-list">
-              <ul>
-                <li>
-                  Skills <strong>UX Design</strong>
-                </li>
-                <li>
-                  Experience <strong>6+ Years</strong>
-                </li>
-                <li>
-                  Current read
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://www.google.co.ke/books/edition/STEVE_JOBS/GejUzgEACAAJ?hl=en"
-                  >
-                    <strong>Steve Jobs </strong>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        className="section section-bg section-parallax section-parallax-5"
-        id="works-section"
-      >
-        <div className="container">
-          {/* Section Heading */}
+       
+                  </div>
+                  <div className="row clients-items">
+                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
+                    <div className="clients-item">
+                    <img src="assets/images/kcb.webp" alt="" className="movable-logo" />
+                    </div>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
+                    <div className="clients-item">
+                    <img src="assets/images/pezesha.webp" alt="" className="movable-logo" />
+                    </div>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
+                    <div className="clients-item">
+                    <img src="assets/images/sotehub.webp" alt="" className="movable-logo" />
+                    </div>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
+                    <div className="clients-item">
+                    <img src="assets/images/vet_mkononi.webp" alt="" className="movable-logo" />
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                </section>
+
+                <section
+                className="section section-bg section-parallax section-parallax-5"
+                id="works-section"
+                >
+                <div className="container">
+                  {/* Section Heading */}
           <div className="m-titles">
-            <h2 className="m-title">My Projects</h2>
+            <h2 className="m-title">Projects</h2>
           </div>
-          <div className="row row-custom">
-            <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
-            <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 vertical-line">
-              {/* Description */}
-              <div className="text py-3">
-                <p>A Collection of my favorite projects</p>
-                {/* <pre>{JSON.stringify(projects, null, 2)}</pre> */}
-              </div>
-            </div>
-          </div>
+
           {/* Works */}
           <div className="works-box">
             {projects.map((project) => (

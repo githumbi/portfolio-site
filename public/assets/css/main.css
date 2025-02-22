@@ -78,7 +78,7 @@ body {
 }
 
 body {
-  background: #181E28;
+  background: #181e28;
 }
 
 body.no-scroll {
@@ -2168,7 +2168,7 @@ body.light-skin .header.sticky .navbar.default:before {
 
 .hero-started .slide {
   position: absolute;
-  bottom: -200px;
+  bottom: -400px;
   right: -239px;
   width: 749px;
   height: 918px;
@@ -2176,17 +2176,16 @@ body.light-skin .header.sticky .navbar.default:before {
 /* Styles for desktop view */
 @media only screen and (min-width: 769px) {
   /* Add your desktop-specific styles here */
-.hero-started .slide img {
-  left: 0;
-  top: 0;
-  width: 60%;
-  height: 60%;
-  object-fit: cover;
+  .hero-started .slide img {
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
 
-  z-index: 10;
+    z-index: 10;
+  }
 }
-}
-
 
 @media only screen and (max-width: 768px) {
   .hero-started .slide img {
@@ -3025,7 +3024,7 @@ body.light-skin .header.sticky .navbar.default:before {
 }
 
 .clients-item img {
-  max-height: 34px;
+  max-height: 54px;
 }
 
 /**
@@ -5725,4 +5724,21 @@ body.light-skin .wc-block-product-search .wc-block-product-search__button {
 
 body.light-skin.single-portfolio .m-titles:before {
   background: #f7f5f2;
+}
+
+.clients-item img {
+  filter: sepia(1) hue-rotate(10deg) saturate(0) brightness(0.9); /* Adjust these values to get the desired brown color and contrast */
+  transition: filter 0.3s ease;
+}
+
+.clients-item:hover img {
+  filter: none;
+}
+
+body.light-skin .clients-item img {
+  filter: sepia(1) hue-rotate(10deg) saturate(0.5) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+body.light-skin .clients-item:hover img {
+  filter: none;
 }
