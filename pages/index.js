@@ -10,7 +10,7 @@ import {
 } from "../utils/Date";
 import { fetchMediumPosts } from "../lib/fetchMediumPosts";
 import { testImage } from "../public/assets/images/blog7.jpg";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
@@ -51,7 +51,6 @@ const Index = ({ projects, blogs, posts }) => {
             <div className="content">
               <div className="titles">
                 <div className="subtitle">Product Designer 🎨</div>
-              
               </div>
               <div className="description">
                 <p>
@@ -86,19 +85,19 @@ const Index = ({ projects, blogs, posts }) => {
             <div className="info-list">
               <ul>
                 <li>
-                  Skills <strong>Design | Developer</strong>
+                  Skills <strong>UX Design</strong>
                 </li>
                 <li>
-                  Experience <strong>5+ Years</strong>
+                  Experience <strong>6+ Years</strong>
                 </li>
                 <li>
                   Current read
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href="https://www.google.co.ke/books/edition/Think_Like_a_Monk/N-T7DwAAQBAJ?hl=en&gbpv=0"
+                    href="https://www.google.co.ke/books/edition/STEVE_JOBS/GejUzgEACAAJ?hl=en"
                   >
-                    <strong>Think like a monk</strong>
+                    <strong>Steve Jobs </strong>
                   </a>
                 </li>
               </ul>
