@@ -78,7 +78,7 @@ body {
 }
 
 body {
-  background: #222a36;
+  background: #181E28;
 }
 
 body.no-scroll {
@@ -2168,8 +2168,8 @@ body.light-skin .header.sticky .navbar.default:before {
 
 .hero-started .slide {
   position: absolute;
-  bottom: 120px;
-  right: -139px;
+  bottom: -200px;
+  right: -239px;
   width: 749px;
   height: 918px;
 }
@@ -2179,8 +2179,8 @@ body.light-skin .header.sticky .navbar.default:before {
 .hero-started .slide img {
   left: 0;
   top: 0;
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: 60%;
   object-fit: cover;
 
   z-index: 10;
@@ -2243,7 +2243,7 @@ body.light-skin .header.sticky .navbar.default:before {
 
 .hero-started .content {
   position: relative;
-  min-height: 670px;
+  min-height: 370px;
 }
 
 .hero-started .titles {
@@ -5217,7 +5217,7 @@ body.light-skin :-ms-input-placeholder {
 }
 
 body.light-skin {
-  background: #f7f5f2;
+  background: #ebe7e0;
   color: #1c2528;
 }
 

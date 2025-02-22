@@ -10,10 +10,35 @@ import {
 } from "../utils/Date";
 import { fetchMediumPosts } from "../lib/fetchMediumPosts";
 import { testImage } from "../public/assets/images/blog7.jpg";
+import { useState, useEffect } from "react";
+
 // const ProjectIsotop = dynamic(() => import("../src/components/ProjectIsotop"), {
 //   ssr: false,
 // });
 const Index = ({ projects, blogs, posts }) => {
+  const [image, setImage] = useState("/assets/images/port-dark.webp");
+
+  useEffect(() => {
+    const checkSkin = () => {
+      const isLightSkin = document.body.classList.contains("light-skin");
+      setImage(
+        isLightSkin
+          ? "/assets/images/port-dark.webp"
+          : "/assets/images/port-light.webp"
+      );
+    };
+
+    checkSkin(); // Run on mount
+
+    // Optional: Observe class changes
+    const observer = new MutationObserver(checkSkin);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect(); // Cleanup on unmount
+  }, []);
   return (
     <Layout>
       <section className="section section-started">
@@ -21,7 +46,7 @@ const Index = ({ projects, blogs, posts }) => {
           {/* Hero Started */}
           <div className="hero-started">
             <div className="slide">
-              <img src="/assets/images/port-dark.webp" alt="Image of Joseph" />
+              <img src={image} alt="Image of Joseph" />
             </div>
             <div className="content">
               <div className="titles">
@@ -60,19 +85,19 @@ const Index = ({ projects, blogs, posts }) => {
             <div className="info-list">
               <ul>
                 <li>
-                  Skills <strong>Design | Developer</strong>
+                  Skills <strong>UX Design</strong>
                 </li>
                 <li>
-                  Experience <strong>5+ Years</strong>
+                  Experience <strong>6+ Years</strong>
                 </li>
                 <li>
                   Current read
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href="https://www.google.co.ke/books/edition/Think_Like_a_Monk/N-T7DwAAQBAJ?hl=en&gbpv=0"
+                    href="https://www.google.co.ke/books/edition/STEVE_JOBS/GejUzgEACAAJ?hl=en"
                   >
-                    <strong>Think like a monk</strong>
+                    <strong>Steve Jobs </strong>
                   </a>
                 </li>
               </ul>
