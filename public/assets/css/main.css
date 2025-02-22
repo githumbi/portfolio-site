@@ -2168,7 +2168,7 @@ body.light-skin .header.sticky .navbar.default:before {
 
 .hero-started .slide {
   position: absolute;
-  bottom: 120px;
+  bottom: 0px;
   right: -139px;
   width: 749px;
   height: 918px;
@@ -2179,8 +2179,8 @@ body.light-skin .header.sticky .navbar.default:before {
 .hero-started .slide img {
   left: 0;
   top: 0;
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: 60%;
   object-fit: cover;
 
   z-index: 10;
