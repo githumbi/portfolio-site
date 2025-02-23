@@ -2152,7 +2152,7 @@ body.light-skin .header.sticky .navbar.default:before {
 }
 
 .hero-started {
-  padding-top: 280px;
+  padding-top: 190px;
   position: relative;
 }
 
@@ -5741,4 +5741,11 @@ body.light-skin .clients-item img {
 }
 body.light-skin .clients-item:hover img {
   filter: none;
+}
+
+@media (max-width: 576px) {
+  .clients-items .col-sm-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
 }
