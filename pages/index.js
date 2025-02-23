@@ -57,6 +57,7 @@ const Index = ({ projects, blogs, posts }) => {
                   I help companies craft customer-centric products through
                   research-driven design.
                 </p>
+
                 <div className="social-links">
                   {/* <a
                     target="_blank"
@@ -79,42 +80,60 @@ const Index = ({ projects, blogs, posts }) => {
                   >
                     <i aria-hidden="true" className="fab fa-behance" />
                   </a>
-                </div>
+                </div><br />
+                <a href="#contact-section" class="btn">
+                  <span>Let's talk</span>
+                </a>
               </div>
             </div>
-       
-                  </div>
-                  <div className="row clients-items">
-                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
-                    <div className="clients-item">
-                    <img src="assets/images/kcb.webp" alt="" className="movable-logo" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
-                    <div className="clients-item">
-                    <img src="assets/images/pezesha.webp" alt="" className="movable-logo" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
-                    <div className="clients-item">
-                    <img src="assets/images/sotehub.webp" alt="" className="movable-logo" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 align-center">
-                    <div className="clients-item">
-                    <img src="assets/images/vet_mkononi.webp" alt="" className="movable-logo" />
-                    </div>
-                  </div>
-                  </div>
-                </div>
-                </section>
+          </div>
+          <div className="row clients-items">
+            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 align-center">
+              <div className="clients-item">
+                <img
+                  src="assets/images/kcb.webp"
+                  alt=""
+                  className="movable-logo"
+                />
+              </div>
+            </div>
+            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 align-center">
+              <div className="clients-item">
+                <img
+                  src="assets/images/pezesha.webp"
+                  alt=""
+                  className="movable-logo"
+                />
+              </div>
+            </div>
+            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 align-center">
+              <div className="clients-item">
+                <img
+                  src="assets/images/sotehub.webp"
+                  alt=""
+                  className="movable-logo"
+                />
+              </div>
+            </div>
+            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 align-center">
+              <div className="clients-item">
+                <img
+                  src="assets/images/vet_mkononi.webp"
+                  alt=""
+                  className="movable-logo"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <section
-                className="section section-bg section-parallax section-parallax-5"
-                id="works-section"
-                >
-                <div className="container">
-                  {/* Section Heading */}
+      <section
+        className="section section-bg section-parallax section-parallax-5"
+        id="works-section"
+      >
+        <div className="container">
+          {/* Section Heading */}
           <div className="m-titles">
             <h2 className="m-title">Projects</h2>
           </div>
