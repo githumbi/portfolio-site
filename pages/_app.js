@@ -14,6 +14,15 @@ function MyApp({ Component, pageProps }) {
           locale: "en_IE",
           url: "https://githumbi.com/",
           siteName: "Thumbi",
+          images: [
+            {
+              url: "/assets/images/og-image.jpg", // Add your default OG image here
+              width: 1200,
+              height: 630,
+              alt: "Thumbi - UX Designer",
+              type: "image/jpeg",
+            },
+          ],
         }}
         twitter={{
           handle: "@githumbi_jk",
@@ -21,7 +30,7 @@ function MyApp({ Component, pageProps }) {
           cardType: "summary_large_image",
         }}
       />
-      <Component {...pageProps} />{" "}
+      <Component {...pageProps} />
     </Fragment>
   );
 }

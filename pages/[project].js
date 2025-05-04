@@ -53,23 +53,24 @@ const WorkSingle = ({ project }) => {
         canonical={`https://githumbi.com/${project.slug}`}
         openGraph={{
           type: "article",
-          // article: {
-          //   publishedTime: "2022-06-21T23:04:13Z",
-          //   modifiedTime: "2022-01-21T18:04:43Z",
-          //   authors: [
-          //     "https://www.example.com/authors/@firstnameA-lastnameA",
-          //     "https://www.example.com/authors/@firstnameB-lastnameB",
-          //   ],
-          //   tags: ["Tag A", "Tag B", "Tag C"],
-          // },
           url: `https://githumbi.com/${project.slug}`,
-          images: {
-            url: `${project.headerimage.url}`,
-            width: 850,
-            height: 650,
-            alt: "Photo of text",
-          },
+          title: project.title,
+          description: project.description,
+          images: [
+            {
+              url: project.headerimage.url,
+              width: 1200,
+              height: 630,
+              alt: project.title,
+              type: "image/jpeg",
+            },
+          ],
           site_name: "Thumbi Portfolio",
+        }}
+        twitter={{
+          handle: "@githumbi_jk",
+          site: "@site",
+          cardType: "summary_large_image",
         }}
       />
       {/* Section Started Heading */}
