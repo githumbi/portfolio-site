@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
           siteName: "Thumbi",
           images: [
             {
-              url: "/assets/images/og-image.jpg", // Add your default OG image here
+              url: "/assets/images/og-image2.jpg", // Add your default OG image here
               width: 1200,
               height: 630,
               alt: "Thumbi - UX Designer",
