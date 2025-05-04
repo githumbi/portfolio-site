@@ -6,27 +6,12 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { NextSeo } from "next-seo";
 
 function renderOptions(links) {
+  // create an asset block map
   const assetBlockMap = new Map();
+  // loop through the assets and add them to the map
   for (const asset of links.assets.block) {
     assetBlockMap.set(asset.sys.id, asset);
   }
-
- const getYoutubeEmbedUrl = (url) => {
-   let videoId;
-
-   // Handle YouTube shorts
-   if (url.includes("youtube.com/shorts/")) {
-     videoId = url.split("shorts/")[1].split("?")[0];
-   } else {
-     // Handle regular YouTube URLs
-     const match = url.match(
-       /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
-     );
-     videoId = match ? match[1] : null;
-   }
-
-   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
- };
 
   return {
     renderNode: {
@@ -37,47 +22,22 @@ function renderOptions(links) {
             [BLOCKS.LIST_ITEM]: (node, children) => children,
           },
         });
+
         return <li>{UnTaggedChildren}</li>;
       },
-      [BLOCKS.PARAGRAPH]: (node, children) => {
-        // Check if the paragraph contains a YouTube link
-        const content = node.content[0]?.value;
-        if (content && content.includes("youtube.com")) {
-          const embedUrl = getYoutubeEmbedUrl(content);
-          if (embedUrl) {
-            return (
-              <div className="video-container">
-                <iframe
-                  width="100%"
-                  height="500"
-                  src={embedUrl}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            );
-          }
-        }
-        return <p>{children}</p>;
-      },
-      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
+        // find the asset in the assetBlockMap by ID
         const asset = assetBlockMap.get(node.data.target.sys.id);
 
-        if (asset && asset.url) {
-          return (
-            <figure>
-              <img src={asset.url} alt={asset.description || "Image"} />
-              {asset.description && (
-                <figcaption className="text-center fst-italic">
-                  {asset.description}
-                </figcaption>
-              )}
-            </figure>
-          );
-        }
-        return null;
+        // render the asset accordingly
+        return (
+          <figure>
+            <img src={asset.url} alt="My image alt text" />
+            <figcaption class="text-center fst-italic">
+              {asset.description}
+            </figcaption>
+          </figure>
+        );
       },
     },
   };
@@ -93,23 +53,24 @@ const WorkSingle = ({ project }) => {
         canonical={`https://githumbi.com/${project.slug}`}
         openGraph={{
           type: "article",
-          // article: {
-          //   publishedTime: "2022-06-21T23:04:13Z",
-          //   modifiedTime: "2022-01-21T18:04:43Z",
-          //   authors: [
-          //     "https://www.example.com/authors/@firstnameA-lastnameA",
-          //     "https://www.example.com/authors/@firstnameB-lastnameB",
-          //   ],
-          //   tags: ["Tag A", "Tag B", "Tag C"],
-          // },
           url: `https://githumbi.com/${project.slug}`,
-          images: {
-            url: `${project.headerimage.url}`,
-            width: 850,
-            height: 650,
-            alt: "Photo of text",
-          },
+          title: project.title,
+          description: project.description,
+          images: [
+            {
+              url: project.headerimage.url,
+              width: 1200,
+              height: 630,
+              alt: project.title,
+              type: "image/jpeg",
+            },
+          ],
           site_name: "Thumbi Portfolio",
+        }}
+        twitter={{
+          handle: "@githumbi_jk",
+          site: "@site",
+          cardType: "summary_large_image",
         }}
       />
       {/* Section Started Heading */}
