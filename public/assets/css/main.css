@@ -5749,3 +5749,25 @@ body.light-skin .clients-item:hover img {
     width: 50%;
   }
 }
+/* Center images and their captions */
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+figure figcaption {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #666;
+}
